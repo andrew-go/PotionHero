@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lights">
+        <item>@drawable/lights_0</item>
+        <item>@drawable/lights_1</item>
+        <item>@drawable/lights_2</item>
+        <item>@drawable/lights_3</item>
+        <item>@drawable/lights_4</item>
+        <item>@drawable/lights_5</item>
+    </string-array>
+</resources>

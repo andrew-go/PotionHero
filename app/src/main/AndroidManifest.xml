@@ -4,17 +4,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.NoTitleBar" >
         <activity
-            android:name=".MenuActivity"
-            android:label="@string/app_name" >
+            android:name=".Activities.MenuActivity"
+            android:screenOrientation="sensorLandscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.GameActivity"
+            android:label="@string/title_activity_game"
+            android:screenOrientation="sensorLandscape" >
+        </activity>
+        <activity
+            android:name=".Activities.BaseActivity"
+            android:label="@string/title_activity_base"
+            android:screenOrientation="sensorLandscape" >
         </activity>
     </application>
 
