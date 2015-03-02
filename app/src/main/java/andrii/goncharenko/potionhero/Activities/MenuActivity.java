@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.Button;
 
 import andrii.goncharenko.potionhero.Controllers.MenuController;
 import andrii.goncharenko.potionhero.R;
@@ -32,7 +31,6 @@ public class MenuActivity extends BaseActivity {
     @Override
     public void initComponents() {
         initeMenuView();
-        Button btNewGame = (Button) findViewById(R.id.btNewGame);
         MenuController.Instance().initDrawThread();
         MenuController.Instance().initMenuThread();
         backgroundMusic = MediaPlayer.create(this, R.raw.menu_music);

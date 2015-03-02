@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
 import andrii.goncharenko.potionhero.Animation;
+import andrii.goncharenko.potionhero.R;
 
 /**
  * Created by Andrey on 02.03.2015.
@@ -38,7 +39,7 @@ public class MenuView extends BaseView {
 
     private void drawBackGround(Canvas canvas) {
         if (backgroundImage == null) {
-            backgroundImage = context.getResources().getDrawable(andrii.goncharenko.potionhero.R.drawable.menu_background);
+            backgroundImage = context.getResources().getDrawable(R.drawable.menu_background);
             backgroundImage.setBounds(canvas.getClipBounds());
         }
         backgroundImage.draw(canvas);

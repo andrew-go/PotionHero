@@ -18,12 +18,10 @@
         </activity>
         <activity
             android:name=".Activities.GameActivity"
-            android:label="@string/title_activity_game"
             android:screenOrientation="sensorLandscape" >
         </activity>
         <activity
             android:name=".Activities.BaseActivity"
-            android:label="@string/title_activity_base"
             android:screenOrientation="sensorLandscape" >
         </activity>
     </application>
