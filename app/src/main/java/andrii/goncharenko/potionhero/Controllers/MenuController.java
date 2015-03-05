@@ -15,20 +15,25 @@ public class MenuController {
         return instance == null ? instance = new MenuController() : instance;
     }
 
-    public MenuView menuView;
+    public MenuView view;
 
     public DrawThread drawThread;
 
     public StatusThread statusThread;
 
-    public void initDrawThread() {
-        MenuController.Instance().drawThread = new DrawThread(menuView, 150);
-        MenuController.Instance().drawThread.start();
+    public void initThreads() {
+        initDrawThread();
+        initStatusThread();
     }
 
-    public void initMenuThread() {
-        MenuController.Instance().statusThread = new StatusThread(150);
-        MenuController.Instance().statusThread.start();
+    private void initDrawThread() {
+        drawThread = new DrawThread(view, 150);
+        drawThread.start();
+    }
+
+    private void initStatusThread() {
+        statusThread = new StatusThread(150);
+        statusThread.start();
     }
 
 }

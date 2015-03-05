@@ -10,9 +10,12 @@
         android:layout_width="match_parent" />
 
     <Button
-        android:id="@+id/btNewGame"
+        android:id="@+id/bt_new_game"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:background="@drawable/bt_new_game_state" />
+        android:background="@drawable/bt_new_game_state"
+        android:onClick="btNewGameClick"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

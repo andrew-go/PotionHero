@@ -9,7 +9,7 @@
         android:theme="@android:style/Theme.NoTitleBar" >
         <activity
             android:name=".Activities.MenuActivity"
-            android:screenOrientation="sensorLandscape" >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,11 +18,11 @@
         </activity>
         <activity
             android:name=".Activities.GameActivity"
-            android:screenOrientation="sensorLandscape" >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Activities.BaseActivity"
-            android:screenOrientation="sensorLandscape" >
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

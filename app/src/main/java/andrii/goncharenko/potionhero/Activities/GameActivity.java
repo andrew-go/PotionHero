@@ -1,10 +1,13 @@
 package andrii.goncharenko.potionhero.Activities;
 
+import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
+import andrii.goncharenko.potionhero.Controllers.GameController;
+import andrii.goncharenko.potionhero.Controllers.MenuController;
 import andrii.goncharenko.potionhero.R;
+import andrii.goncharenko.potionhero.Views.MenuView;
 
 public class GameActivity extends BaseActivity {
 
@@ -15,21 +18,16 @@ public class GameActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_game, menu);
-        return true;
+    public void initComponents() {
+        initMenuView();
+        GameController.Instance().initThreads();
+        backgroundMusic = MediaPlayer.create(this, R.raw.game_music);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    AnimationDrawable frameAnimation;
+
+    public void initMenuView() {
+        MenuController.Instance().view = (MenuView) findViewById(R.id.menuView);
     }
+
 }

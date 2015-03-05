@@ -1,4 +1,4 @@
-package andrii.goncharenko.potionhero;
+package andrii.goncharenko.potionhero.Controllers;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,6 +8,8 @@ import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import andrii.goncharenko.potionhero.R;
 
 /**
  * Created by Andrey on 02.03.2015.
