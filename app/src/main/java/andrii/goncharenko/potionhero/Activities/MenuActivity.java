@@ -1,7 +1,6 @@
 package andrii.goncharenko.potionhero.Activities;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -34,8 +33,6 @@ public class MenuActivity extends BaseActivity {
         backgroundMusic = MediaPlayer.create(this, R.raw.menu_music);
         btClickSound  = MediaPlayer.create(this, R.raw.menu_bt_click);
     }
-
-    AnimationDrawable frameAnimation;
 
     public void initMenuView() {
         MenuController.Instance().view = (MenuView) findViewById(R.id.menuView);

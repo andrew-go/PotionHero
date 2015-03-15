@@ -8,4 +8,25 @@
         <item>@drawable/lights_4</item>
         <item>@drawable/lights_5</item>
     </string-array>
+    <string-array name="ingredients">
+        <item>@drawable/leaf</item>
+        <item>@drawable/magenta_mushroom</item>
+        <item>@drawable/blood</item>
+        <item>@drawable/ingredient_3</item>
+        <item>@drawable/ingredient_4</item>
+        <item>@drawable/ingredient_5</item>
+        <item>@drawable/ingredient_6</item>
+        <item>@drawable/ingredient_7</item>
+        <item>@drawable/ingredient_8</item>
+        <item>@drawable/ingredient_9</item>
+        <item>@drawable/ingredient_11</item>
+        <item>@drawable/ingredient_12</item>
+        <item>@drawable/ingredient_13</item>
+        <item>@drawable/ingredient_14</item>
+        <item>@drawable/ingredient_15</item>
+        <item>@drawable/ingredient_16</item>
+        <item>@drawable/ingredient_17</item>
+        <item>@drawable/yellow_potion</item>
+        <item>@drawable/red_mushroom</item>
+    </string-array>
 </resources>

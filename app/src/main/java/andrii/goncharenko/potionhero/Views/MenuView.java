@@ -47,7 +47,7 @@ public class MenuView extends BaseView {
 
     private void drawLights(Canvas canvas) {
         if (lightAnimation == null) {
-            lightAnimation = new Animation(context, new Point(300, 250));
+            lightAnimation = new Animation(context, new Point(300, 220));
         }
         lightAnimation.draw(canvas);
     }
