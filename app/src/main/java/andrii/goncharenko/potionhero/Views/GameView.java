@@ -23,6 +23,7 @@ public class GameView extends BaseView {
     private Drawable backgroundImage;
     private Drawable boardImage;
     private Drawable magicCloud;
+    private Drawable manuscript;
 
     public Drawable getBoardImage() {
         return boardImage;
@@ -68,12 +69,14 @@ public class GameView extends BaseView {
                 drawBackGround(canvas);
                 drawBoard(canvas);
                 drawIngredients(canvas);
+                drawManuscript(canvas);
                 drawCombination(canvas);
                 break;
             case combining:
                 drawBackGround(canvas);
                 drawBoard(canvas);
                 drawIngredients(canvas);
+                drawManuscript(canvas);
                 drawCombination(canvas);
                 break;
             case combined:
@@ -113,15 +116,19 @@ public class GameView extends BaseView {
             ingredientImage = ingredients.get(CombinationController.Instance().getCombination()[index]);
             ingredientImage.setBounds(
                     ((DeviceSettings.width / 2) - (CombinationController.Instance().getCombination().length * 130 / 2)) + index * 130,
-                    0 + BoardController.Instance().gameBoardActiveMargin + 1 * 130,
+                    100 + BoardController.Instance().gameBoardActiveMargin + 1 * 130,
                     ((DeviceSettings.width / 2) - (CombinationController.Instance().getCombination().length * 130 / 2)) + index * 130 + ingredientImage.getMinimumWidth(),
-                    0 + BoardController.Instance().gameBoardActiveMargin + 1 * 130 + ingredientImage.getMinimumHeight());
+                    100 + BoardController.Instance().gameBoardActiveMargin + 1 * 130 + ingredientImage.getMinimumHeight());
             ingredientImage.draw(canvas);
         }
     }
 
     private void drawMagicCloud(Canvas canvas) {
         magicCloud.draw(canvas);
+    }
+
+    private void drawManuscript(Canvas canvas) {
+        manuscript.draw(canvas);
     }
 
     private void initImages() {
@@ -147,11 +154,20 @@ public class GameView extends BaseView {
         if (magicCloud == null) {
             magicCloud = context.getResources().getDrawable(R.drawable.magic_cloud);
             magicCloud.setBounds(
-                    390,
-                    90,
-                    390 + magicCloud.getMinimumWidth(),
-                    90 + magicCloud.getMinimumHeight());
+                    ((DeviceSettings.width / 2) - (magicCloud.getMinimumWidth() / 2)),
+                    175,
+                    ((DeviceSettings.width / 2) - (magicCloud.getMinimumWidth() / 2)) + magicCloud.getMinimumWidth(),
+                    175 + magicCloud.getMinimumHeight());
         }
+        if (manuscript == null) {
+            manuscript = context.getResources().getDrawable(R.drawable.manuscript2);
+            manuscript.setBounds(
+                    ((DeviceSettings.width / 2) - (manuscript.getMinimumWidth() / 2)),
+                    275,
+                    ((DeviceSettings.width / 2) - (manuscript.getMinimumWidth() / 2)) + manuscript.getMinimumWidth(),
+                    275 + manuscript.getMinimumHeight());
+        }
+
     }
 
 }
