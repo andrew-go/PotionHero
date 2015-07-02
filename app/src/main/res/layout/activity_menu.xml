@@ -5,7 +5,7 @@
     tools:context="andrii.goncharenko.potionhero.Activities.MenuActivity" >
 
     <andrii.goncharenko.potionhero.Views.MenuView
-        android:id="@+id/menuView"
+        android:id="@+id/menu_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
 
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:background="@drawable/bt_new_game_state"
-        android:onClick="btNewGameClick"
+        android:onClick="btNewGameClicked"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

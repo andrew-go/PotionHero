@@ -10,31 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import andrii.goncharenko.potionhero.Controllers.BoardController;
+import andrii.goncharenko.potionhero.Managers.GameManager;
 import andrii.goncharenko.potionhero.Controllers.CombinationController;
-import andrii.goncharenko.potionhero.Controllers.GameController;
 import andrii.goncharenko.potionhero.R;
-import andrii.goncharenko.potionhero.Settings.DeviceSettings;
+import andrii.goncharenko.potionhero.Services.DeviceSettingsService;
 
 /**
  * Created by Andrey on 02.03.2015.
  */
 public class GameView extends BaseView {
 
+    /**Constants**/
+
+    public static final int GAME_BOARD_MARGIN = 90;
+    public static final int INGREDIENT_ACTION_SIZE = 130;
+    public static final int MAGIC_CLOUD_TOP_MARGIN = 175;
+    public static final int MANUSCRIPT_TOP_MARGIN = 275;
+
+    /**Members**/
+
     private Drawable backgroundImage;
     private Drawable boardImage;
     private Drawable magicCloud;
     private Drawable manuscript;
-
-    public Drawable getBoardImage() {
-        return boardImage;
-    }
-
-    private List<Drawable> ingredients;
     private Drawable ingredientImage;
+    private List<Drawable> ingredients;
 
-    public Drawable getIngredientImage() {
-        return ingredientImage;
-    }
+    /**Constructors**/
 
     public GameView(Context context) {
         super(context);
@@ -51,10 +53,18 @@ public class GameView extends BaseView {
         initImages();
     }
 
+    /**Get/Set methods**/
+
+    public Drawable getBoardImage() {
+        return boardImage;
+    }
+
+    /**Virtual methods**/
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        switch (GameController.Instance().gameStatus) {
+        switch (GameManager.Instance().gameStatus) {
             case noAction:
                 drawBackGround(canvas);
                 drawBoard(canvas);
@@ -90,6 +100,8 @@ public class GameView extends BaseView {
         }
     }
 
+    /**Private methods**/
+
     private void drawBackGround(Canvas canvas) {
         backgroundImage.draw(canvas);
     }
@@ -99,26 +111,28 @@ public class GameView extends BaseView {
     }
 
     private void drawIngredients(Canvas canvas) {
-        for (int rowIndex = 0; rowIndex < BoardController.Instance().getBoard().length; rowIndex++)
-            for (int columnIndex = 0; columnIndex < BoardController.Instance().getBoard()[rowIndex].length; columnIndex++) {
-                ingredientImage = ingredients.get(BoardController.Instance().getBoard()[rowIndex][columnIndex]);
+        for (int rowIndex = 0; rowIndex < BoardController.Instance().getBoard().getBoardArr().length; rowIndex++)
+            for (int columnIndex = 0; columnIndex < BoardController.Instance().getBoard().getBoardArr()[rowIndex].length; columnIndex++) {
+                ingredientImage = ingredients.get(BoardController.Instance().getBoard().getBoardArr()[rowIndex][columnIndex]);
                 ingredientImage.setBounds(
-                        boardImage.getBounds().left + BoardController.Instance().gameBoardActiveMargin + columnIndex * 130,
-                        boardImage.getBounds().top + BoardController.Instance().gameBoardActiveMargin + rowIndex * 130,
-                        (boardImage.getBounds().left + BoardController.Instance().gameBoardActiveMargin + columnIndex * 130) + ingredientImage.getMinimumWidth(),
-                        (boardImage.getBounds().top + BoardController.Instance().gameBoardActiveMargin + rowIndex * 130) + ingredientImage.getMinimumHeight());
+                        boardImage.getBounds().left + GAME_BOARD_MARGIN + columnIndex * INGREDIENT_ACTION_SIZE,
+                        boardImage.getBounds().top + GAME_BOARD_MARGIN + rowIndex * INGREDIENT_ACTION_SIZE,
+                        (boardImage.getBounds().left + GAME_BOARD_MARGIN + columnIndex * INGREDIENT_ACTION_SIZE) + ingredientImage.getMinimumWidth(),
+                        (boardImage.getBounds().top + GAME_BOARD_MARGIN + rowIndex * INGREDIENT_ACTION_SIZE) + ingredientImage.getMinimumHeight());
                 ingredientImage.draw(canvas);
             }
     }
 
     private void drawCombination(Canvas canvas) {
-        for (int index = 0; index < CombinationController.Instance().getCombination().length; index++) {
-            ingredientImage = ingredients.get(CombinationController.Instance().getCombination()[index]);
+        for (int index = 0; index < CombinationController.Instance().getCombination().getCombinationArr().length; index++) {
+            ingredientImage = ingredients.get(CombinationController.Instance().getCombination().getCombinationArr()[index]);
             ingredientImage.setBounds(
-                    ((DeviceSettings.width / 2) - (CombinationController.Instance().getCombination().length * 130 / 2)) + index * 130,
-                    100 + BoardController.Instance().gameBoardActiveMargin + 1 * 130,
-                    ((DeviceSettings.width / 2) - (CombinationController.Instance().getCombination().length * 130 / 2)) + index * 130 + ingredientImage.getMinimumWidth(),
-                    100 + BoardController.Instance().gameBoardActiveMargin + 1 * 130 + ingredientImage.getMinimumHeight());
+                    ((DeviceSettingsService.width / 2) - (CombinationController.Instance().getCombination().getCombinationArr().length
+                            * INGREDIENT_ACTION_SIZE / 2)) + index * INGREDIENT_ACTION_SIZE,
+                            100 + GAME_BOARD_MARGIN + INGREDIENT_ACTION_SIZE,
+                    ((DeviceSettingsService.width / 2) - (CombinationController.Instance().getCombination().getCombinationArr().length
+                            * INGREDIENT_ACTION_SIZE / 2)) + index * INGREDIENT_ACTION_SIZE + ingredientImage.getMinimumWidth(),
+                            100 + GAME_BOARD_MARGIN + INGREDIENT_ACTION_SIZE + ingredientImage.getMinimumHeight());
             ingredientImage.draw(canvas);
         }
     }
@@ -134,15 +148,15 @@ public class GameView extends BaseView {
     private void initImages() {
         if (backgroundImage == null) {
             backgroundImage = context.getResources().getDrawable(R.drawable.game_background);
-            backgroundImage.setBounds(0, 0, DeviceSettings.width, DeviceSettings.height);
+            backgroundImage.setBounds(0, 0, DeviceSettingsService.width, DeviceSettingsService.height);
         }
         if (boardImage == null) {
             boardImage = context.getResources().getDrawable(R.drawable.game_board_1);
             boardImage.setBounds(
                     0,
-                    DeviceSettings.height -  boardImage.getMinimumHeight(),
+                    DeviceSettingsService.height -  boardImage.getMinimumHeight(),
                     boardImage.getMinimumWidth(),
-                    DeviceSettings.height);
+                    DeviceSettingsService.height);
         }
         if (ingredients == null) {
             ingredients = new ArrayList<>();
@@ -154,18 +168,18 @@ public class GameView extends BaseView {
         if (magicCloud == null) {
             magicCloud = context.getResources().getDrawable(R.drawable.magic_cloud);
             magicCloud.setBounds(
-                    ((DeviceSettings.width / 2) - (magicCloud.getMinimumWidth() / 2)),
-                    175,
-                    ((DeviceSettings.width / 2) - (magicCloud.getMinimumWidth() / 2)) + magicCloud.getMinimumWidth(),
-                    175 + magicCloud.getMinimumHeight());
+                    ((DeviceSettingsService.width / 2) - (magicCloud.getMinimumWidth() / 2)),
+                    MAGIC_CLOUD_TOP_MARGIN,
+                    ((DeviceSettingsService.width / 2) - (magicCloud.getMinimumWidth() / 2)) + magicCloud.getMinimumWidth(),
+                    MAGIC_CLOUD_TOP_MARGIN + magicCloud.getMinimumHeight());
         }
         if (manuscript == null) {
             manuscript = context.getResources().getDrawable(R.drawable.manuscript2);
             manuscript.setBounds(
-                    ((DeviceSettings.width / 2) - (manuscript.getMinimumWidth() / 2)),
-                    275,
-                    ((DeviceSettings.width / 2) - (manuscript.getMinimumWidth() / 2)) + manuscript.getMinimumWidth(),
-                    275 + manuscript.getMinimumHeight());
+                    ((DeviceSettingsService.width / 2) - (manuscript.getMinimumWidth() / 2)),
+                    MANUSCRIPT_TOP_MARGIN,
+                    ((DeviceSettingsService.width / 2) - (manuscript.getMinimumWidth() / 2)) + manuscript.getMinimumWidth(),
+                    MANUSCRIPT_TOP_MARGIN + manuscript.getMinimumHeight());
         }
 
     }

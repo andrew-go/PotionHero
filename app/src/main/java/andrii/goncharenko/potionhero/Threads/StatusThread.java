@@ -5,10 +5,13 @@ package andrii.goncharenko.potionhero.Threads;
  */
 public class StatusThread extends Thread {
 
+    /**Constants**/
+    private final int STANDARD_DELAY = 100;
+
     /**Members**/
 
     boolean run = true;
-    int sleepDuration = 100;
+    int sleepDuration = STANDARD_DELAY;
 
     /**Constructors**/
 

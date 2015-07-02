@@ -5,10 +5,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
-import andrii.goncharenko.potionhero.Controllers.MenuController;
+import andrii.goncharenko.potionhero.Managers.MenuManager;
 import andrii.goncharenko.potionhero.R;
 import andrii.goncharenko.potionhero.Views.MenuView;
-
 
 public class MenuActivity extends BaseActivity {
 
@@ -23,28 +22,28 @@ public class MenuActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         initComponents();
-        startMusic();
     }
 
     @Override
     public void initComponents() {
-        initMenuView();
-        MenuController.Instance().initThreads();
+        super.initComponents();
+        MenuManager.Instance().view = (MenuView) findViewById(R.id.menu_view);
+        MenuManager.Instance().initThreads();
+    }
+
+    @Override
+    public void initSounds() {
         backgroundMusic = MediaPlayer.create(this, R.raw.menu_music);
         btClickSound  = MediaPlayer.create(this, R.raw.menu_bt_click);
     }
 
-    public void initMenuView() {
-        MenuController.Instance().view = (MenuView) findViewById(R.id.menuView);
-    }
+    /**Events**/
 
-    public void btNewGameClick(View view) {
+    public void btNewGameClicked(View view) {
         Intent intent = new Intent(getBaseContext(), GameActivity.class);
         startActivity(intent);
-        btClickSound.start();
-        stopMusic();
-        MenuController.Instance().drawThread.stopThread();
-        MenuController.Instance().statusThread.stopThread();
+        playSound(btClickSound);
+        MenuManager.Instance().destroy();
     }
 
 }

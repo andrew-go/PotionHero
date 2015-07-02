@@ -1,12 +1,16 @@
 package andrii.goncharenko.potionhero.Threads;
 
+import andrii.goncharenko.potionhero.Managers.GameManager;
 import andrii.goncharenko.potionhero.Controllers.CombinationController;
-import andrii.goncharenko.potionhero.Controllers.GameController;
 
 /**
  * Created by Andrey on 02.03.2015.
  */
 public class GameStatusThread extends Thread {
+
+    /**Constants**/
+    private final int STANDARD_DELAY = 100;
+    private final int COMBINED_DELAY = 1000;
 
     /**Enums**/
     public enum eGameStatus
@@ -22,7 +26,7 @@ public class GameStatusThread extends Thread {
     /**Members**/
 
     boolean run = true;
-    int sleepDuration = 100;
+    int sleepDuration = STANDARD_DELAY;
 
     /**Constructors**/
 
@@ -43,7 +47,7 @@ public class GameStatusThread extends Thread {
     public void run() {
         while(run) {
             try {
-                switch (GameController.Instance().gameStatus) {
+                switch (GameManager.Instance().gameStatus) {
                     case noAction:
                         break;
                     case creatingCombination:
@@ -54,7 +58,7 @@ public class GameStatusThread extends Thread {
                     case combining:
                         break;
                     case combined:
-                        sleep(1000);
+                        sleep(COMBINED_DELAY);
                         onCombined();
                         break;
                     case afterCombining:
@@ -67,14 +71,16 @@ public class GameStatusThread extends Thread {
         }
     }
 
+    /**Private methods**/
+
     private void createCombination() {
         CombinationController.Instance().generateNewCombination();
-        GameController.Instance().gameStatus = eGameStatus.combinationCreated;
+        GameManager.Instance().gameStatus = eGameStatus.combinationCreated;
     }
 
     private void onCombined() {
         CombinationController.Instance().generateNewCombination();
-        GameController.Instance().gameStatus = eGameStatus.combinationCreated;
+        GameManager.Instance().gameStatus = eGameStatus.combinationCreated;
     }
 
 }

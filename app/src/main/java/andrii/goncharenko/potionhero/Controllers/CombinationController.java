@@ -1,35 +1,43 @@
 package andrii.goncharenko.potionhero.Controllers;
 
+import andrii.goncharenko.potionhero.Models.Combination;
+
 /**
- * Created by Andrey on 06.03.2015.
+ * Created by Andrey on 02.03.2015.
  */
 public class CombinationController {
 
+    /**Constants**/
+
+    private final int MAX_COMBINATION_LENGTH = 3;
+
+    /**Members**/
+
     private static CombinationController instance;
+
+    Combination combination = new Combination(MAX_COMBINATION_LENGTH);
+
+    private int[] collectingCombination;
+
+    /**Instances**/
 
     public static CombinationController Instance() {
         return instance == null ? instance = new CombinationController() : instance;
     }
 
-    private int combinationLength = 3; /**TODO while no cauldron connection**/
+    /**Get/Set methods**/
 
-    private int[] combination;
-
-    public int[] getCombination() {
+    public Combination getCombination() {
         return combination;
     }
 
-    private int[] collectingCombination;
-
-    public int[] getCollectingCombination() {
-        return collectingCombination;
-    }
+    /**Public methods**/
 
     public boolean addIngredientToCollectingCombination(int ingredient) {
-        for (int ingredientIndex = 0; ingredientIndex < combinationLength; ingredientIndex++) {
+        for (int ingredientIndex = 0; ingredientIndex < combination.getCombinationArr().length; ingredientIndex++) {
             if (collectingCombination[ingredientIndex] != -1)
                 continue;
-            else if (combination[ingredientIndex] != ingredient)
+            else if (combination.getCombinationArr()[ingredientIndex] != ingredient)
                 return false;
             collectingCombination[ingredientIndex] = ingredient;
             return true;
@@ -38,20 +46,20 @@ public class CombinationController {
     }
 
     public void clearCollectingCombination() {
-        collectingCombination = new int[combinationLength];
-        for (int ingredientIndex = 0; ingredientIndex < combinationLength; ingredientIndex++)
+        collectingCombination = new int[combination.getCombinationArr().length];
+        for (int ingredientIndex = 0; ingredientIndex < combination.getCombinationArr().length; ingredientIndex++)
             collectingCombination[ingredientIndex] = -1;
     }
 
     public void generateNewCombination() {
-        combination = new int[combinationLength];
-        for (int ingredientIndex = 0; ingredientIndex < combinationLength; ingredientIndex++)
-            combination[ingredientIndex] = IngredientsController.Instance().getRandomBoardIngredient();
+        combination = new Combination(MAX_COMBINATION_LENGTH);
+        for (int ingredientIndex = 0; ingredientIndex < combination.getCombinationArr().length; ingredientIndex++)
+            combination.getCombinationArr()[ingredientIndex] = BoardController.Instance().getRandomBoardIngredient();
     }
 
     public boolean checkCombination() {
-        for (int ingredientIndex = 0; ingredientIndex < combinationLength; ingredientIndex++)
-            if (combination[ingredientIndex] != collectingCombination[ingredientIndex])
+        for (int ingredientIndex = 0; ingredientIndex < combination.getCombinationArr().length; ingredientIndex++)
+            if (combination.getCombinationArr()[ingredientIndex] != collectingCombination[ingredientIndex])
                 return false;
         return true;
     }

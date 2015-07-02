@@ -6,7 +6,7 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 
-import andrii.goncharenko.potionhero.Controllers.Animation;
+import andrii.goncharenko.potionhero.Services.AnimationService;
 import andrii.goncharenko.potionhero.R;
 
 /**
@@ -16,7 +16,7 @@ public class MenuView extends BaseView {
 
     private Drawable backgroundImage;
 
-    private Animation lightAnimation;
+    private AnimationService lightAnimation;
 
     public MenuView(Context context) {
         super(context);
@@ -47,7 +47,7 @@ public class MenuView extends BaseView {
 
     private void drawLights(Canvas canvas) {
         if (lightAnimation == null) {
-            lightAnimation = new Animation(context, new Point(300, 220));
+            lightAnimation = new AnimationService(context, new Point(300, 220));
         }
         lightAnimation.draw(canvas);
     }

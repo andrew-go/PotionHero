@@ -9,7 +9,11 @@ import android.view.View;
  */
 public class BaseView  extends View {
 
+    /**Members**/
+
     protected Context context;
+
+    /**Constructors**/
 
     public BaseView(Context context) {
         super(context);

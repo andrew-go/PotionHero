@@ -7,11 +7,14 @@ import android.view.View;
  */
 public class DrawThread extends Thread {
 
+    /**Constants**/
+    private final int STANDARD_DELAY = 100;
+
     /** Members **/
 
     View view;
     boolean run = true;
-    int sleepDuration = 100;
+    int sleepDuration = STANDARD_DELAY;
 
     /** Constructors **/
 

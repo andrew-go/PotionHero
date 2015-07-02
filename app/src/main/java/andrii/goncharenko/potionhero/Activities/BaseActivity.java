@@ -7,11 +7,15 @@ import android.view.View;
 import android.view.WindowManager;
 
 import andrii.goncharenko.potionhero.R;
-import andrii.goncharenko.potionhero.Settings.GameSettings;
+import andrii.goncharenko.potionhero.Services.GameSettingsService;
 
 public class BaseActivity  extends FragmentActivity {
 
+    /**Members**/
+
     protected MediaPlayer backgroundMusic;
+
+    /**Virtual methods**/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +49,41 @@ public class BaseActivity  extends FragmentActivity {
         stopMusic();
     }
 
-    public void initComponents() {
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopMusic();
     }
 
+    /**Public methods**/
+
+    public void initComponents() {
+        if (GameSettingsService.isSoundsOn)
+            initSounds();
+        if (GameSettingsService.isMusicOn)
+            initMusic();
+    }
+
+    public void initSounds() {}
+
+    public void initMusic() {}
+
     public void startMusic() {
-        if (backgroundMusic == null || backgroundMusic.isPlaying() || !GameSettings.Instance().isMusicOn)
+        if (backgroundMusic == null || backgroundMusic.isPlaying() || !GameSettingsService.isMusicOn)
             return;
         backgroundMusic.start();
     }
 
     public void stopMusic() {
-        if (backgroundMusic == null || !backgroundMusic.isPlaying() || !GameSettings.Instance().isMusicOn)
+        if (backgroundMusic == null || !backgroundMusic.isPlaying() || !GameSettingsService.isMusicOn)
             return;
-        backgroundMusic.stop();
+        backgroundMusic.reset();
+    }
+
+    public void playSound(MediaPlayer sound) {
+        if (!GameSettingsService.isSoundsOn || sound == null)
+            return;
+        sound.start();
     }
 
 }
